@@ -1,6 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link, NavLink } from 'react-router';
+import useAuth from '../../Hooks/useAuth';
 
 const Navbar = () => {
+     const[toggle,setToggle] = useState('home')
+
+     const {user,logOutUser} = useAuth()
+
+     const logOut = ()=>{
+      logOutUser()
+      .then()
+      .catch(error=>{
+        alert(error.message)
+      })
+     }
+  
+  const links = <>
+    <li><NavLink  to="/"><span onClick={()=>setToggle('home')} className={` font-medium text-[#000000] mr-3 ${toggle==='home'&&'text-[#9F62F2]   border-b'}`}>Home</span></NavLink></li>
+
+    <li><NavLink  to="/books"><span onClick={()=>setToggle('books')} className={` font-medium text-[#000000] mr-3 ${toggle==='books'&&'text-[#9F62F2]   border-b'}`}>Books</span></NavLink></li>
+
+    <li><NavLink  to="/dashboard"><span onClick={()=>setToggle('Dashboard')} className={` font-medium text-[#000000] mr-3 ${toggle==='Dashboard'&&'text-[#9F62F2]   border-b'}`}>Dashboard</span></NavLink></li>
+  
+  </>
+
+  //----------theme toggle-----------
+   const [theme,setTheme] = useState(localStorage.getItem('theme') ||'light')
+
+   useEffect(()=>{
+   const html = document.querySelector('html')
+   html.setAttribute('data-theme',theme)
+   localStorage.setItem('theme',theme)
+   
+   },[theme])
+
+   const handleTheme = (checked)=>{
+    setTheme(checked?'dark':'light')
+   }
     return (
         <div className="navbar bg-base-100 shadow-sm">
   <div className="navbar-start">
@@ -11,36 +47,29 @@ const Navbar = () => {
       <ul
         tabIndex="-1"
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-        <li><a>Item 1</a></li>
-        <li>
-          <a>Parent</a>
-          <ul className="p-2">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
-          </ul>
-        </li>
-        <li><a>Item 3</a></li>
+       {links}
       </ul>
     </div>
     <a className="btn btn-ghost text-xl">daisyUI</a>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
-      <li><a>Item 1</a></li>
-      <li>
-        <details>
-          <summary>Parent</summary>
-          <ul className="p-2 bg-base-100 w-40 z-1">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
-          </ul>
-        </details>
-      </li>
-      <li><a>Item 3</a></li>
+      {links}
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn">Button</a>
+
+    <div className="dropdown dropdown-end">
+  <div tabIndex={0} role="button" className=" m-1">{user?<img className='w-[50px] h-[50px] bg-blue-300 rounded-full' src={user?.photoURL} alt="" />:<button><Link to='/login' className='btn'><span className='text-primary '>Login</span></Link></button>}</div>
+  <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-100 w-52 p-2 shadow-sm">
+ 
+      <li className='font-semibold'><NavLink to='/login'>Login </NavLink></li>
+      <li className='font-semibold'><NavLink to='/profile'>Profile</NavLink></li>
+      <input className='toggle' onChange={(e)=>handleTheme(e.target.checked)} type="checkbox" name="" id="" />
+    <li className='font-semibold'><a onClick={logOut}>Logout</a></li>
+   
+  </ul>
+</div>
   </div>
 </div>
     );
