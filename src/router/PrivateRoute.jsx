@@ -6,6 +6,7 @@ import Loding from '../component/Loding';
 const PrivateRoute = ({children}) => {
     const{user,loding} = useAuth()
     const location = useLocation()
+    
     if(loding){
         return <Loding></Loding>
 
@@ -13,7 +14,7 @@ const PrivateRoute = ({children}) => {
     if(user){
         return children
     }
-    return <Navigate state={location.pathName} to='/login'></Navigate>
+    return <Navigate state={location.pathname} to='/login'></Navigate>
 };
 
 export default PrivateRoute;

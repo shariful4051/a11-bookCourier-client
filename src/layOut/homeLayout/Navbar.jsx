@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
+import Loding from '../../component/Loding';
 
 const Navbar = () => {
      const[toggle,setToggle] = useState('home')
@@ -37,6 +38,7 @@ const Navbar = () => {
    const handleTheme = (checked)=>{
     setTheme(checked?'dark':'light')
    }
+  
     return (
         <div className="navbar bg-base-100 shadow-sm">
   <div className="navbar-start">

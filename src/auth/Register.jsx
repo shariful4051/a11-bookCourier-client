@@ -1,34 +1,37 @@
 import React from 'react';
 import GoogleLogin from '../component/GoogleLogin';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { useForm } from "react-hook-form"
 import useAuth from '../Hooks/useAuth';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
 const Register = () => {
+  const location = useLocation()
+  const navigate = useNavigate()
+ 
 
     const { createUser,updateUser,setUser} = useAuth()
     const {register,handleSubmit,formState:{errors}} = useForm()
 
     const handleRegister = (data)=>{
-        console.log( data);
+   
         
         const profileImg = data.photo[0]
         createUser(data.email,data.password)
         .then(result=>{
           const user= result.user
-          console.log(result.user);
+         
          //toast.success('register success')
           //store image and get image url
           const formData = new FormData()
           formData.append('image',profileImg)
-          console.log('from form data',formData,formData.append('image',profileImg));
+         
           const imageURL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host}`
 
           axios.post(imageURL,formData)
           .then(res=>{
-            console.log('after upload image',res.data.data.url);
+            //console.log('after upload image',res.data.data.url);
               const userProfile = {
             photoURL:res.data.data.url,
             displayName:data.name,
@@ -40,6 +43,7 @@ const Register = () => {
             toast.success('Register success.')
             //setUser({...user,displayName:data.name,photoURL:res.data.data.url})
             setUser({...user,...userProfile})
+            navigate(location.state ||'/')
           })
           .catch(error=>{
             toast.error(error.message)
@@ -72,7 +76,7 @@ const Register = () => {
           
     }
     return (
-     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+     <div className=" mx-auto my-7 card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
       <div className="card-body">
          <h1 className="text-5xl font-bold">Register now!</h1>
         <form onSubmit={handleSubmit(handleRegister)}>
@@ -95,7 +99,7 @@ const Register = () => {
 
              {/* photo */}
           <label className="label">Photo</label>
-          <input type="file" {...register('photo')} className="file-input" placeholder=""  />
+          <input type="file" {...register('photo')} className="file-input" placeholder="" required  />
 
 
              {/* email */}
@@ -122,7 +126,7 @@ const Register = () => {
         </form>
         <div>
             <h3 className='text-center font-semibold'>Already have an account? Please</h3>
-           <Link to='/login'> <p className=' text-center underline cursor-pointer font-semibold'>Login Now</p></Link>
+           <Link state={location?.state} to='/login'> <p className=' text-center underline cursor-pointer font-semibold'>Login Now</p></Link>
         </div>
          <span className='  text-center w-full'> <GoogleLogin></GoogleLogin></span>
       </div>
