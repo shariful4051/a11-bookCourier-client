@@ -14,6 +14,7 @@ import MYOrders from '../Pages/Dashboard/MYOrders';
 import PaymentSuccess from '../Pages/Dashboard/PaymentSuccess';
 import PaymentCancelled from '../Pages/Dashboard/PaymentCancelled';
 import PaymentsHistory from '../Pages/Dashboard/PaymentsHistory';
+import UserManegement from '../Pages/Dashboard/UserManegement';
 
 const Router = createBrowserRouter([
     {
@@ -72,6 +73,10 @@ const Router = createBrowserRouter([
             {
                 path:'paymentHistory',
                 Component:PaymentsHistory
+            },
+            {
+                path:'userManagement',
+                element:<UserManegement></UserManegement>
             }
         ]
     }

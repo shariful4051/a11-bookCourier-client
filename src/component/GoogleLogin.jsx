@@ -2,17 +2,38 @@ import React from 'react';
 import useAuth from '../Hooks/useAuth';
 import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
 
 const GoogleLogin = () => {
 
+    const {user}=useAuth();
+
+    console.log('from google user',user);
+    
+    const axiosSecure = useAxiosSecure()
+
     const location = useLocation()
     const navigate = useNavigate()
-    console.log(location);
+    //console.log(location);
+
     const {googleUser,setUser} = useAuth()
+
     const googleLogin = () =>{
         googleUser()
         .then(result =>{
-          setUser(result.user)  
+          setUser(result.user) 
+
+          const userInfo = {
+            displayName:user.displayName,
+            email:user.email,
+            photo:user.photoURL,
+            status:'user'
+          }
+          console.log('user object',userInfo);
+          axiosSecure.post('/users',userInfo) 
+          .then(res=>{
+            //console.log('user post  from google',res.data,);
+          })
           toast.success('Google login success.')
           navigate(location.state || '/')
         })

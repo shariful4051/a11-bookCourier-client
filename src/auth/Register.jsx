@@ -5,10 +5,12 @@ import { useForm } from "react-hook-form"
 import useAuth from '../Hooks/useAuth';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
 
 const Register = () => {
   const location = useLocation()
   const navigate = useNavigate()
+  const axiosSecure = useAxiosSecure()
  
 
     const { createUser,updateUser,setUser} = useAuth()
@@ -40,6 +42,18 @@ const Register = () => {
            //update user profile
           updateUser(userProfile)
           .then(()=>{
+
+              const userInfo = {
+            displayName:data.name,
+            email:data.email,
+            photo:res.data.data.url,
+            status:'user'
+          }
+          console.log('user object from register',userInfo);
+          axiosSecure.post('/users',userInfo)
+          .then(res=>{
+            console.log(res.data);
+          })
             toast.success('Register success.')
             //setUser({...user,displayName:data.name,photoURL:res.data.data.url})
             setUser({...user,...userProfile})
