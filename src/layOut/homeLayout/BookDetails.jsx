@@ -1,10 +1,13 @@
 import React, { useRef } from 'react';
 import { useLoaderData } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
+import { useForm } from 'react-hook-form';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const BookDetails = () => {
-    const {user} = useAuth()
-    console.log( 'from details',user);
+    const { user } = useAuth()
+    //console.log( 'from details',user);
     const modalRef = useRef()
 
     const openModal = () => {
@@ -12,7 +15,36 @@ const BookDetails = () => {
     }
 
     const book = useLoaderData()
-    console.log('book from details', book);
+    //console.log('book from details', book);
+
+
+    //------------order-
+    const { register, handleSubmit, formState: { errors } } = useForm()
+    const axiosSecure = useAxiosSecure()
+
+    const handleOrder = data => {
+        console.log('object from order:', data);
+        const orderBook = {
+            ...data,
+            bookName: book.bookName,
+            cost: Number(book.price),
+            delivery_status: 'pending',
+            payment_status: 'pay'
+        }
+        console.log('orderbook', orderBook);
+        axiosSecure.post('/orders', orderBook)
+            .then(res => {
+                console.log('after order post', res.data);
+                if (res.data.insertedId) {
+                    modalRef.current.close()
+                    Swal.fire({
+                        title: "Book Added Successfully !",
+                        icon: "success",
+                        draggable: true
+                    });
+                }
+            })
+    }
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row">
@@ -51,21 +83,27 @@ const BookDetails = () => {
                     <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
                         <div className="modal-box">
                             <h3 className="font-bold text-lg">Buy Now</h3>
-                            <form >
+                            <form onSubmit={handleSubmit(handleOrder)}>
                                 <fieldset className="fieldset">
                                     <label className="label">Name</label>
-                                    <input type="text" value={user?.displayName} className="input"  readOnly />
+                                    <input type="text" {...register('name')} value={user?.displayName} className="input" readOnly />
 
                                     <label className="label">Email</label>
-                                    <input type="email" value={user?.email} className="input"  readOnly />
+                                    <input type="email" {...register('email')} value={user?.email} className="input" readOnly />
 
                                     <label className="label">Phone</label>
-                                    <input type="text"  className="input" placeholder='Phone number'  required />
+                                    <input type="text" {...register('phone',
+                                        {pattern:/^(?:\+880|880|01)[3-9]\d{8}$/}
+                                        )} className="input" placeholder='017XXXXXXXX' required />
+                                        {
+                                            errors.phone?.type==='pattern'&& <p className='text-red-500 text-sm'>Please enter a valid Bangladeshi phone number (e.g. 017XXXXXXXX or +88017XXXXXXXX).</p>
+                    
+                                        }
 
                                     <label className="label">Address</label>
-                                    <input type="text"  className="input" placeholder='address' required />
-                                    
-                                    
+                                    <input type='text' {...register('address')} className="input" placeholder='address' required />
+
+
                                     <button className="btn btn-neutral mt-4">Order Now</button>
                                 </fieldset>
                             </form>

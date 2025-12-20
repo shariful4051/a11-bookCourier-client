@@ -116,7 +116,7 @@ const Register = () => {
           )}
            className="input" placeholder="Password" required />
            {
-            errors.password?.type==='pattern' && <p className='text-small text-red-500'>Password must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters or long.</p>
+            errors.password?.type==='pattern' && <p className=' text-red-500'>Password must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters or long.</p>
            }
     
           <button className="btn btn-neutral mt-4">Register Now</button>

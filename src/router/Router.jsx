@@ -10,6 +10,10 @@ import Hero from '../layOut/dashbordLayout/Hero';
 import AddBook from '../Pages/Dashboard/Librarian/AddBook';
 import Books from '../layOut/homeLayout/Books';
 import BookDetails from '../layOut/homeLayout/BookDetails';
+import MYOrders from '../Pages/Dashboard/MYOrders';
+import PaymentSuccess from '../Pages/Dashboard/PaymentSuccess';
+import PaymentCancelled from '../Pages/Dashboard/PaymentCancelled';
+import PaymentsHistory from '../Pages/Dashboard/PaymentsHistory';
 
 const Router = createBrowserRouter([
     {
@@ -50,8 +54,24 @@ const Router = createBrowserRouter([
                 Component: Hero
             },
             {
+                path:'myOrder',
+                Component:MYOrders
+            },
+            {
                 path: '/dashboard/addBook',
                 Component: AddBook
+            },
+            {
+                path:'payment-success',
+                Component:PaymentSuccess
+            },
+            {
+                path:'payment-cancelled',
+                Component:PaymentCancelled
+            },
+            {
+                path:'paymentHistory',
+                Component:PaymentsHistory
             }
         ]
     }
