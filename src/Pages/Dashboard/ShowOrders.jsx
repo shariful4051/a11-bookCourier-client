@@ -1,16 +1,16 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
-import useAuth from '../../Hooks/useAuth';
-import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import React from 'react';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import useAuth from '../../Hooks/useAuth';
+import { useQuery } from '@tanstack/react-query';
 
-const OrderBooks = () => {
-    const { user } = useAuth()
+const ShowOrders = () => {
+   const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
     const { refetch, data: orderBooks = [] } = useQuery({
         queryKey: ['orderBooks', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/orders/librarian?librarian_email=${user?.email}`)
+            const res = await axiosSecure.get('/orders')
             return res.data
         }
     })
@@ -88,7 +88,7 @@ const OrderBooks = () => {
 
     return (
         <div>
-            <h3 className='font-bold text-center underline my-2'>Order For My Added Books : {orderBooks.length}</h3>
+            <h3 className='font-bold text-center underline my-2'>All Orders In This Website : {orderBooks.length}</h3>
 
 
             <div className="overflow-x-auto">
@@ -116,7 +116,7 @@ const OrderBooks = () => {
                                     <td>{
                                         order.payment_status === 'pay' ? <button className='btn bg-amber-200'>Pay</button> : <button className=' btn text-green-400 bg-green-200'>Paid</button>
                                     }</td>
-                                     <td className={`  ${order.delivery_status=="pending" && 'text-red-500 font-bold '} ${order.delivery_status=='Shiping' && 'text-amber-500 font-bold'} ${order.delivery_status=='Delivered' && 'text-green-500 font-bold'}`}>{
+                                    <td className={`  ${order.delivery_status=="pending" && 'text-red-500 font-bold '} ${order.delivery_status=='Shiping' && 'text-amber-500 font-bold'} ${order.delivery_status=='Delivered' && 'text-green-500 font-bold'}`}>{
                                     order.delivery_status
                                     }</td>
                                     <td>
@@ -124,9 +124,9 @@ const OrderBooks = () => {
                                               
                                            
                                                 
-                                                     <button onClick={() => handleShiping(order)} className='btn mx-2 bg-green-500'>Shiping</button>
+                                                     <button onClick={() => handleShiping(order)} className='btn mx-2 text-green-500'>Shiping</button>
                                                 
-                                                <button onClick={() => handleDelivered(order)} className='btn bg-green-500'>Delivered</button>
+                                                <button onClick={() => handleDelivered(order)} className='btn text-green-500'>Delivered</button>
                                                   {
                                                     order.delivery_status === "pending"&&order.payment_status==='pay' && <button onClick={() => { handleCancel(order) }} className='btn bg-red-500'>Cancel</button>
                                                 }
@@ -148,4 +148,4 @@ const OrderBooks = () => {
     );
 };
 
-export default OrderBooks;
+export default ShowOrders;

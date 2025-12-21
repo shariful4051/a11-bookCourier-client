@@ -18,6 +18,7 @@ import UserManegement from '../Pages/Dashboard/UserManegement';
 import LibrarianAddBooks from '../Pages/LibrarianAddBooks';
 import OrderBooks from '../Pages/Dashboard/OrderBooks';
 import BookManage from '../Pages/Dashboard/BookManage';
+import ShowOrders from '../Pages/Dashboard/ShowOrders';
 
 const Router = createBrowserRouter([
     {
@@ -98,6 +99,10 @@ const Router = createBrowserRouter([
             {
                 path:'bookManagement',
                 element:<BookManage></BookManage>
+            },
+            {
+                path:'showAllOrders',
+                element:<ShowOrders></ShowOrders>
             }
         ]
     }

@@ -30,6 +30,7 @@ const Dashboard = () => {
           <li className='font-bold text-2xl'>Admin</li>
           <li><NavLink to='/dashboard/userManagement'>User Management</NavLink></li>
           <li><NavLink to='/dashboard/bookManagement'>Book Management</NavLink></li>
+          <li><NavLink to='/dashboard/showAllOrders'> Show All Orders</NavLink></li>
 
 
         </ul>
