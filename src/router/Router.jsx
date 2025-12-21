@@ -17,6 +17,7 @@ import PaymentsHistory from '../Pages/Dashboard/PaymentsHistory';
 import UserManegement from '../Pages/Dashboard/UserManegement';
 import LibrarianAddBooks from '../Pages/LibrarianAddBooks';
 import OrderBooks from '../Pages/Dashboard/OrderBooks';
+import BookManage from '../Pages/Dashboard/BookManage';
 
 const Router = createBrowserRouter([
     {
@@ -89,9 +90,14 @@ const Router = createBrowserRouter([
                 path:'paymentHistory',
                 Component:PaymentsHistory
             },
+            //----------admin-----
             {
                 path:'userManagement',
                 element:<UserManegement></UserManegement>
+            },
+            {
+                path:'bookManagement',
+                element:<BookManage></BookManage>
             }
         ]
     }
