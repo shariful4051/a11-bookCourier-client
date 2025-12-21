@@ -3,10 +3,16 @@ import { Link, NavLink } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
 import Loding from '../../component/Loding';
 
+
+
 const Navbar = () => {
      const[toggle,setToggle] = useState('home')
 
      const {user,logOutUser} = useAuth()
+
+     //----------
+     
+     
 
      const logOut = ()=>{
       logOutUser()

@@ -24,9 +24,9 @@ const GoogleLogin = () => {
           setUser(result.user) 
 
           const userInfo = {
-            displayName:user.displayName,
-            email:user.email,
-            photo:user.photoURL,
+            displayName:user?.displayName,
+            email:user?.email,
+            photo:user?.photoURL,
             status:'user'
           }
           console.log('user object',userInfo);

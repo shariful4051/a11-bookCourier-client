@@ -19,11 +19,13 @@ import LibrarianAddBooks from '../Pages/LibrarianAddBooks';
 import OrderBooks from '../Pages/Dashboard/OrderBooks';
 import BookManage from '../Pages/Dashboard/BookManage';
 import ShowOrders from '../Pages/Dashboard/ShowOrders';
+import ErrorPage from '../component/ErrorPage';
+import Profile from '../component/Profile';
 
-const Router = createBrowserRouter([
+   const Router = createBrowserRouter([
     {
         path: '/',
-        errorElement: <p>page not found</p>,
+        errorElement: <ErrorPage></ErrorPage>,
         Component: HomeLayout,
         children: [
             {
@@ -47,6 +49,10 @@ const Router = createBrowserRouter([
             {
                 path: '/register',
                 Component: Register
+            },
+            {
+                path:'profile',
+                Component:Profile
             }
         ]
     },
