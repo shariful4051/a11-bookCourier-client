@@ -15,7 +15,7 @@ const BookDetails = () => {
     }
 
     const book = useLoaderData()
-    //console.log('book from details', book);
+    console.log('book from details', book);
 
 
     //------------order-
@@ -27,9 +27,11 @@ const BookDetails = () => {
         const orderBook = {
             ...data,
             bookName: book.bookName,
+            librarian_email:book.librarian_email,
             cost: Number(book.price),
             delivery_status: 'pending',
-            payment_status: 'pay'
+            payment_status: 'pay',
+            createAt:new Date()
         }
         console.log('orderbook', orderBook);
         axiosSecure.post('/orders', orderBook)
@@ -93,12 +95,12 @@ const BookDetails = () => {
 
                                     <label className="label">Phone</label>
                                     <input type="text" {...register('phone',
-                                        {pattern:/^(?:\+880|880|01)[3-9]\d{8}$/}
-                                        )} className="input" placeholder='017XXXXXXXX' required />
-                                        {
-                                            errors.phone?.type==='pattern'&& <p className='text-red-500 text-sm'>Please enter a valid Bangladeshi phone number (e.g. 017XXXXXXXX or +88017XXXXXXXX).</p>
-                    
-                                        }
+                                        { pattern: /^(?:\+880|880|01)[3-9]\d{8}$/ }
+                                    )} className="input" placeholder='017XXXXXXXX' required />
+                                    {
+                                        errors.phone?.type === 'pattern' && <p className='text-red-500 text-sm'>Please enter a valid Bangladeshi phone number (e.g. 017XXXXXXXX or +88017XXXXXXXX).</p>
+
+                                    }
 
                                     <label className="label">Address</label>
                                     <input type='text' {...register('address')} className="input" placeholder='address' required />

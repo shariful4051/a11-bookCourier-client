@@ -15,6 +15,8 @@ import PaymentSuccess from '../Pages/Dashboard/PaymentSuccess';
 import PaymentCancelled from '../Pages/Dashboard/PaymentCancelled';
 import PaymentsHistory from '../Pages/Dashboard/PaymentsHistory';
 import UserManegement from '../Pages/Dashboard/UserManegement';
+import LibrarianAddBooks from '../Pages/LibrarianAddBooks';
+import OrderBooks from '../Pages/Dashboard/OrderBooks';
 
 const Router = createBrowserRouter([
     {
@@ -58,9 +60,22 @@ const Router = createBrowserRouter([
                 path:'myOrder',
                 Component:MYOrders
             },
+
+
+            //----------Librarians
+
+
             {
                 path: '/dashboard/addBook',
                 Component: AddBook
+            },
+            {
+                path:'myBooks',
+                element:<LibrarianAddBooks></LibrarianAddBooks>
+            },
+            {
+                path:'orderBooks',
+                element:<OrderBooks></OrderBooks>
             },
             {
                 path:'payment-success',

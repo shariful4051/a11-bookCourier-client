@@ -44,7 +44,7 @@ const MYOrders = () => {
   <table className="table table-xs">
     <thead>
       <tr>
-        <th></th>
+        <th>Sr no.</th>
         
         <th>Book_Name</th>
         <th>Cost</th>

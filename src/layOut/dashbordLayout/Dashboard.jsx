@@ -21,10 +21,12 @@ const Dashboard = () => {
           <li><NavLink to='/'>Home</NavLink></li>
           <li><NavLink to='/dashboard/myOrder'>My Orders</NavLink></li>
           <li><NavLink to='/dashboard/paymentHistory'>My Payments History</NavLink></li>
+
           <li className='font-bold text-2xl'>Librarian</li>
           <li><NavLink to='/dashboard/addBook'>Add Book</NavLink></li>
-          <li><NavLink>My Books</NavLink></li>
-          <li><NavLink>Orders</NavLink></li>
+          <li><NavLink to='/dashboard/myBooks'>My Books</NavLink></li>
+          <li><NavLink to='/dashboard/orderBooks'>Order For My Books</NavLink></li>
+          
           <li className='font-bold text-2xl'>Admin</li>
           <li><NavLink to='/dashboard/userManagement'>User Management</NavLink></li>
 
