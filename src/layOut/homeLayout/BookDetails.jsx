@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 
 const BookDetails = () => {
+    const navigate =useNavigate()
     const { user } = useAuth()
     //console.log( 'from details',user);
     const modalRef = useRef()
@@ -38,6 +39,7 @@ const BookDetails = () => {
             .then(res => {
                 console.log('after order post', res.data);
                 if (res.data.insertedId) {
+                    navigate('/dashboard/myOrder')
                     modalRef.current.close()
                     Swal.fire({
                         title: "Book Added Successfully !",

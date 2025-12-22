@@ -38,7 +38,7 @@ import Profile from '../component/Profile';
             },
             {
                 path:'bookDetails/:id',
-                Component:BookDetails,
+                element:<PrivateRoute><BookDetails></BookDetails></PrivateRoute>,
                 loader:({params})=>fetch(`http://localhost:3000/books/${params.id}`)
 
             },
@@ -52,7 +52,7 @@ import Profile from '../component/Profile';
             },
             {
                 path:'profile',
-                Component:Profile
+                element:<PrivateRoute><Profile></Profile></PrivateRoute>
             }
         ]
     },

@@ -8,7 +8,7 @@ const Books = () => {
     const {data:books=[]} = useQuery({
         queryKey:['books'],
         queryFn:async()=>{
-            const res= await axiosSecure.get('/books')
+            const res= await axiosSecure.get('/books/published')
             console.log(res.data);
             return res.data
         }
@@ -16,7 +16,7 @@ const Books = () => {
     console.log(books);
     return (
         <div>
-            <h3>Total Books : <span>{books.length}</span></h3>
+            <h2 className='text-center font-bold underline my-3 text-primary text-[25px]'>Total Published Books : <span>{books.length}</span></h2>
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 '>
                 {
                     books.map(book=><BooksCard

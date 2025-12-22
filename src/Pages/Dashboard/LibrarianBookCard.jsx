@@ -46,6 +46,8 @@ const LibrarianBookCard = ({ book, refetch }) => {
         <h2 className="card-title"><span>Book Name:</span>    <span>{book.bookName}</span></h2>
         <h2 className="card-title"><span>Writer:</span>    <span>{book.author}</span></h2>
         <p><span>Price:</span> <span>{book.price}$</span></p>
+        <p><span>Book Status:</span> <span className={`${book.status=='Published'?'text-green-500 font-bold':'text-red-500 font-bold'}`}>{book.status}</span></p>
+
         <div className="card-actions justify-end">
           <button onClick={openModal} className="btn btn-primary">Edit</button>
 

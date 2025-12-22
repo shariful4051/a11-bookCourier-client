@@ -1,7 +1,10 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router';
+import useStatus from '../../Hooks/useStatus';
 
 const Dashboard = () => {
+  const { status } = useStatus()
+  console.log('status from dashboard', status.status);
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -23,14 +26,26 @@ const Dashboard = () => {
           <li><NavLink to='/dashboard/paymentHistory'>My Payments History</NavLink></li>
 
           <li className='font-bold text-2xl'>Librarian</li>
-          <li><NavLink to='/dashboard/addBook'>Add Book</NavLink></li>
-          <li><NavLink to='/dashboard/myBooks'>My Books</NavLink></li>
-          <li><NavLink to='/dashboard/orderBooks'>Order For My Books</NavLink></li>
-          
+          {
+            status.status === 'librarian' ||status.status==='admin' && <>
+              <li><NavLink to='/dashboard/addBook'>Add Book</NavLink></li>
+              <li><NavLink to='/dashboard/myBooks'>My Books</NavLink></li>
+              <li><NavLink to='/dashboard/orderBooks'>Order For My Books</NavLink></li>
+            </>
+          }
+
+
           <li className='font-bold text-2xl'>Admin</li>
-          <li><NavLink to='/dashboard/userManagement'>User Management</NavLink></li>
-          <li><NavLink to='/dashboard/bookManagement'>Book Management</NavLink></li>
-          <li><NavLink to='/dashboard/showAllOrders'> Show All Orders</NavLink></li>
+          {
+            status.status === 'admin' && <>
+
+              <li><NavLink to='/dashboard/userManagement'>User Management</NavLink></li>
+              <li><NavLink to='/dashboard/bookManagement'>Book Management</NavLink></li>
+              <li><NavLink to='/dashboard/showAllOrders'> Show All Orders</NavLink></li>
+
+            </>
+          }
+
 
 
         </ul>

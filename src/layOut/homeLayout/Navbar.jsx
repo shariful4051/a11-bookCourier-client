@@ -54,11 +54,11 @@ const Navbar = () => {
       </div>
       <ul
         tabIndex="-1"
-        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-111 mt-3 w-52 p-2 shadow">
        {links}
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">daisyUI</a>
+    <a className="btn btn-ghost text-xl"><span className='font-bold text-primary'>Book Courier</span></a>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
@@ -69,7 +69,7 @@ const Navbar = () => {
 
     <div className="dropdown dropdown-end">
   <div tabIndex={0} role="button" className=" m-1">{user?<img className='w-[50px] h-[50px] bg-blue-300 rounded-full' src={user?.photoURL} alt="" />:<button><Link to='/login' className='btn'><span className='text-primary '>Login</span></Link></button>}</div>
-  <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-100 w-52 p-2 shadow-sm">
+  <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-111  w-52 p-2 shadow-sm">
  
       <li className='font-semibold'><NavLink to='/login'>Login </NavLink></li>
       <li className='font-semibold'><NavLink to='/profile'>Profile</NavLink></li>

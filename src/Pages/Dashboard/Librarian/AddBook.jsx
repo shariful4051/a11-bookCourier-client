@@ -10,7 +10,7 @@ const AddBook = () => {
 
     const {user} = useAuth()
     console.log(user.email);
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit } = useForm()
     const axiosSecure = useAxiosSecure()
 
     const handleAddBook = data => {
@@ -30,7 +30,7 @@ const AddBook = () => {
 
         const formData = new FormData()
         formData.append('image', bookImage)
-        const imageURL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host}`
+        const imageURL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`
         axios.post(imageURL, formData)
             .then(res => {
 
