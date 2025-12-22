@@ -26,13 +26,13 @@ const Dashboard = () => {
           <li><NavLink to='/dashboard/paymentHistory'>My Payments History</NavLink></li>
 
           <li className='font-bold text-2xl'>Librarian</li>
-          {
-            status.status === 'librarian' ||status.status==='admin' && <>
+           {
+           ( status.status === 'admin' ||status.status==='librarian') && <> 
               <li><NavLink to='/dashboard/addBook'>Add Book</NavLink></li>
               <li><NavLink to='/dashboard/myBooks'>My Books</NavLink></li>
               <li><NavLink to='/dashboard/orderBooks'>Order For My Books</NavLink></li>
-            </>
-          }
+           </>
+          } 
 
 
           <li className='font-bold text-2xl'>Admin</li>
@@ -43,8 +43,8 @@ const Dashboard = () => {
               <li><NavLink to='/dashboard/bookManagement'>Book Management</NavLink></li>
               <li><NavLink to='/dashboard/showAllOrders'> Show All Orders</NavLink></li>
 
-            </>
-          }
+             </>
+          } 
 
 
 

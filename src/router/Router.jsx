@@ -39,7 +39,7 @@ import Profile from '../component/Profile';
             {
                 path:'bookDetails/:id',
                 element:<PrivateRoute><BookDetails></BookDetails></PrivateRoute>,
-                loader:({params})=>fetch(`http://localhost:3000/books/${params.id}`)
+                loader:({params})=>fetch(`https://book-courier-jade.vercel.app/books/${params.id}`)
 
             },
             {

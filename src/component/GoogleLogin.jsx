@@ -6,7 +6,9 @@ import useAxiosSecure from '../Hooks/useAxiosSecure';
 
 const GoogleLogin = () => {
 
-    const {user}=useAuth();
+   
+ const {googleUser,setUser,user} = useAuth()
+ //console.log('from -------------here',user,user?.displayName,user?.photoURL);
 
     console.log('from google user',user);
     
@@ -16,8 +18,7 @@ const GoogleLogin = () => {
     const navigate = useNavigate()
     //console.log(location);
 
-    const {googleUser,setUser} = useAuth()
-
+   
     const googleLogin = () =>{
         googleUser()
         .then(result =>{
@@ -31,7 +32,7 @@ const GoogleLogin = () => {
           }
           console.log('user object',userInfo);
           axiosSecure.post('/users',userInfo) 
-          .then(res=>{
+          .then(()=>{
             //console.log('user post  from google',res.data,);
           })
           toast.success('Google login success.')

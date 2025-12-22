@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 const BookDetails = () => {
     const navigate =useNavigate()
     const { user } = useAuth()
-    //console.log( 'from details',user);
+    console.log( 'from details',user);
     const modalRef = useRef()
 
     const openModal = () => {
@@ -90,7 +90,7 @@ const BookDetails = () => {
                             <form onSubmit={handleSubmit(handleOrder)}>
                                 <fieldset className="fieldset">
                                     <label className="label">Name</label>
-                                    <input type="text" {...register('name')} value={user?.displayName} className="input" readOnly />
+                                    <input type="text" {...register('name')} value={user?.displayName} className="input" required />
 
                                     <label className="label">Email</label>
                                     <input type="email" {...register('email')} value={user?.email} className="input" readOnly />
