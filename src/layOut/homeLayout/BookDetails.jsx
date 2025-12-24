@@ -51,7 +51,7 @@ const BookDetails = () => {
             })
     }
 
-    const dbuser = useDbUser()
+    const {dbuser} = useDbUser()
     console.log(dbuser?.user2);
 
     return (
