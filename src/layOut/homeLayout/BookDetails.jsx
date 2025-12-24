@@ -4,6 +4,7 @@ import useAuth from '../../Hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import useDbUser from '../../Hooks/useDbUser';
 
 const BookDetails = () => {
     const navigate =useNavigate()
@@ -49,6 +50,10 @@ const BookDetails = () => {
                 }
             })
     }
+
+    const dbuser = useDbUser()
+    console.log(dbuser?.user2);
+
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row">
@@ -90,10 +95,10 @@ const BookDetails = () => {
                             <form onSubmit={handleSubmit(handleOrder)}>
                                 <fieldset className="fieldset">
                                     <label className="label">Name</label>
-                                    <input type="text" {...register('name')} value={user?.displayName} className="input" required />
+                                    <input type="text" {...register('name')} value={dbuser?.user2.displayName} className="input" readOnly />
 
                                     <label className="label">Email</label>
-                                    <input type="email" {...register('email')} value={user?.email} className="input" readOnly />
+                                    <input type="email" {...register('email')} value={dbuser?.user2.email} className="input" readOnly />
 
                                     <label className="label">Phone</label>
                                     <input type="text" {...register('phone',

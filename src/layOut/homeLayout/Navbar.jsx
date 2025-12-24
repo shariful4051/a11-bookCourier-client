@@ -3,6 +3,10 @@ import { Link, NavLink, useNavigate } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
 import Loding from '../../component/Loding';
 
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
+import useDbUser from '../../Hooks/useDbUser';
+
 
 
 const Navbar = () => {
@@ -11,7 +15,27 @@ const Navbar = () => {
 
      const {user,logOutUser} = useAuth()
 
-     //----------
+    //  //----------dbuser-----
+        
+    // const axiosSecure = useAxiosSecure()
+
+    // const {data:dbuser} = useQuery({
+    //     queryKey:['dbUser',user?.email],
+    //     queryFn: async()=>{
+    //         const res =await axiosSecure.get(`/users/${user?.email}/user`)
+    //         return res.data
+    //     }
+    // })
+    // console.log('from navbar db user',dbUser?.user2?.displayName);
+
+
+
+
+    //  //-----------
+
+    // dbuser from hook-----
+
+    const {dbuser}= useDbUser()
      
      
 
@@ -71,7 +95,7 @@ const Navbar = () => {
   <div className="navbar-end">
 
     <div className="dropdown dropdown-end">
-  <div tabIndex={0} role="button" className=" m-1">{user?<img className='w-[50px] h-[50px] bg-blue-300 rounded-full' src={user?.photoURL} alt="" />:<button><Link to='/login' className='btn'><span className='text-primary '>Login</span></Link></button>}</div>
+  <div tabIndex={0} role="button" className=" m-1">{user?<img className='w-[50px] h-[50px] bg-blue-300 rounded-full' src={dbuser?.user2?.photo} alt="" />:<button><Link to='/login' className='btn'><span className='text-primary '>Login</span></Link></button>}</div>
   <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-111  w-52 p-2 shadow-sm">
  
       <li className='font-semibold'><NavLink to='/login'>Login </NavLink></li>

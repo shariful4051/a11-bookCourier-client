@@ -20,7 +20,8 @@ import OrderBooks from '../Pages/Dashboard/OrderBooks';
 import BookManage from '../Pages/Dashboard/BookManage';
 import ShowOrders from '../Pages/Dashboard/ShowOrders';
 import ErrorPage from '../component/ErrorPage';
-import Profile from '../component/Profile';
+
+import Profile2 from '../component/Profile2';
 
    const Router = createBrowserRouter([
     {
@@ -39,7 +40,8 @@ import Profile from '../component/Profile';
             {
                 path:'bookDetails/:id',
                 element:<PrivateRoute><BookDetails></BookDetails></PrivateRoute>,
-                loader:({params})=>fetch(`https://book-courier-jade.vercel.app/books/${params.id}`)
+               // loader:({params})=>fetch(`https://book-courier-jade.vercel.app/books/${params.id}`)
+                loader:({params})=>fetch(`http://localhost:3000/books/${params.id}`)
 
             },
             {
@@ -52,8 +54,9 @@ import Profile from '../component/Profile';
             },
             {
                 path:'profile',
-                element:<PrivateRoute><Profile></Profile></PrivateRoute>
-            }
+                element:<PrivateRoute><Profile2></Profile2></PrivateRoute>
+            },
+           
         ]
     },
     {
