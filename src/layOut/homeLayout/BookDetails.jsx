@@ -23,7 +23,7 @@ const BookDetails = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const axiosSecure = useAxiosSecure()
 
-    const handleOrder = data => {
+    const handleOrder= data => {
         console.log('object from order:', data);
         const orderBook = {
             ...data,

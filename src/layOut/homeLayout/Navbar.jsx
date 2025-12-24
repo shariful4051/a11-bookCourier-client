@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
 import Loding from '../../component/Loding';
 
 
 
 const Navbar = () => {
+  const navigate = useNavigate()
      const[toggle,setToggle] = useState('home')
 
      const {user,logOutUser} = useAuth()
@@ -16,7 +17,9 @@ const Navbar = () => {
 
      const logOut = ()=>{
       logOutUser()
-      .then()
+      .then(()=>{
+        navigate('/login')
+      })
       .catch(error=>{
         alert(error.message)
       })

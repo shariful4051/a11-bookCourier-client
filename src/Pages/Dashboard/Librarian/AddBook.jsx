@@ -4,9 +4,12 @@ import { useForm } from 'react-hook-form';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2'
 import useAuth from '../../../Hooks/useAuth';
+import { useNavigate } from 'react-router';
 
 
 const AddBook = () => {
+
+    const navigate = useNavigate()
 
     const {user} = useAuth()
     console.log(user.email);
@@ -39,6 +42,7 @@ const AddBook = () => {
                     .then(res => {
                         console.log('after book post', res.data);
                         if (res.data.insertedId) {
+                            navigate('/dashboard/myBooks')
                             Swal.fire({
                                 title: "Book Added Successfully !",
                                 icon: "success",

@@ -5,6 +5,11 @@ import useStatus from '../../Hooks/useStatus';
 const Dashboard = () => {
   const { status } = useStatus()
   console.log('status from dashboard', status.status);
+
+  const linkClass = ({isActive}) =>
+    `
+  ${isActive?'menu bg-base-200 min-h-full w-80 p-4 underline text-primary font-semibold':'menu bg-base-200 min-h-full w-80 p-4'}
+  `
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -22,15 +27,15 @@ const Dashboard = () => {
         <ul className="menu bg-base-200 min-h-full w-80 p-4">
           {/* Sidebar content here */}
           <li><NavLink to='/'>Home</NavLink></li>
-          <li><NavLink to='/dashboard/myOrder'>My Orders</NavLink></li>
-          <li><NavLink to='/dashboard/paymentHistory'>My Payments History</NavLink></li>
+          <li><NavLink className={linkClass} to='/dashboard/myOrder'>My Orders</NavLink></li>
+          <li><NavLink className={linkClass} to='/dashboard/paymentHistory'>My Payments History</NavLink></li>
 
           <li className='font-bold text-2xl'>Librarian</li>
            {
            ( status.status === 'admin' ||status.status==='librarian') && <> 
-              <li><NavLink to='/dashboard/addBook'>Add Book</NavLink></li>
-              <li><NavLink to='/dashboard/myBooks'>My Books</NavLink></li>
-              <li><NavLink to='/dashboard/orderBooks'>Order For My Books</NavLink></li>
+              <li><NavLink className={linkClass} to='/dashboard/addBook'>Add Book</NavLink></li>
+              <li><NavLink className={linkClass} to='/dashboard/myBooks'>My Books</NavLink></li>
+              <li><NavLink className={linkClass} to='/dashboard/orderBooks'>Order For My Books</NavLink></li>
            </>
           } 
 
@@ -39,9 +44,9 @@ const Dashboard = () => {
           {
             status.status === 'admin' && <>
 
-              <li><NavLink to='/dashboard/userManagement'>User Management</NavLink></li>
-              <li><NavLink to='/dashboard/bookManagement'>Book Management</NavLink></li>
-              <li><NavLink to='/dashboard/showAllOrders'> Show All Orders</NavLink></li>
+              <li><NavLink className={linkClass} to='/dashboard/userManagement'>User Management</NavLink></li>
+              <li><NavLink className={linkClass} to='/dashboard/bookManagement'>Book Management</NavLink></li>
+              <li><NavLink className={linkClass} to='/dashboard/showAllOrders'> Show All Orders</NavLink></li>
 
              </>
           } 
